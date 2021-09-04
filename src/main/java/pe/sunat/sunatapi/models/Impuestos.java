@@ -14,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name="t_impuesto")
 public class Impuestos {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
