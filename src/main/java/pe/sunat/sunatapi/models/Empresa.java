@@ -1,6 +1,5 @@
 package pe.sunat.sunatapi.models;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -39,8 +38,7 @@ public class Empresa {
 
     @Transient
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Persona> persona;
-
+    private List<PagoAbono> pagoAbono;
 
     
 }

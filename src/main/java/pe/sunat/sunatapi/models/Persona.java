@@ -2,6 +2,8 @@ package pe.sunat.sunatapi.models;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
+
 import lombok.*;
 import javax.persistence.*;
 
@@ -27,6 +29,10 @@ public class Persona {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date fechaNac;
     private String direccion;
+
+    @Transient
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<PagoAbono> pagoAbono;
 
 
 }
