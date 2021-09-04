@@ -31,10 +31,10 @@ public class Empresa {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date fechaInscripcion;
     
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "detalleImpuesto_id")
-    private DetalleImpuesto detalleImpuestoId;
+    @Transient
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<DetalleImpuesto> detalleImpuesto;
+
 
     @Transient
     @OneToMany(fetch = FetchType.LAZY)

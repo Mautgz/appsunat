@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import pe.sunat.sunatapi.models.Empresa;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Integer>{
-   @Query(value = "SELECT o FROM Alumno o WHERE o.ruc=?1")
+public interface EmpresaRepository extends JpaRepository<Empresa, BigInteger>{
+   @Query(value = "SELECT o FROM Empresa o WHERE o.ruc=?1")
    Optional<Empresa> findByRuc(BigInteger ruc);
 }
