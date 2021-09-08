@@ -7,7 +7,7 @@ import java.util.List;
 import lombok.*;
 import javax.persistence.*;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,25 +18,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "t_persona")
-public class Persona {
+@Table(name = "t_servicio")
+public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private BigInteger dni;
-    private String nombres;
-    private String apellidos;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date fechaNac;
-    
-    private String direccion;
+    private int id; 
+    private String nombreServicio;
+    private String descripcionServicio;
+    private float precio;
 
     @Transient
     @OneToMany(fetch = FetchType.LAZY)
     private List<Factura> factura;
 
-
-
+    
 
 
 }

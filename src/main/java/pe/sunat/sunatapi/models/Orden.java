@@ -1,5 +1,6 @@
 package pe.sunat.sunatapi.models;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -18,19 +19,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "t_empresa")
-public class Empresa {
+@Table(name = "t_orden")
 
+public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; 
-    private BigInteger ruc;
-    private String razonSocial;
-    private String direccion;
+    private Integer id;
+    private int meses;
+    private BigDecimal subtotal;
 
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Factura> factura;
-
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="factura_id")
+    private Factura factura;
+    
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="servicio_id")
+    private Servicio servicio;
 }

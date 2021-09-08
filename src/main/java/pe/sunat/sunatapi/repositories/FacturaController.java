@@ -1,5 +1,5 @@
 package pe.sunat.sunatapi.repositories;
 
-public class PagoAbonoRepository {
+public class FacturaController {
     
 }
