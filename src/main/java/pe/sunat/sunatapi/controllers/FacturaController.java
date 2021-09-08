@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 // import pe.sunat.sunatapi.models.DetalleImpuesto;
 // import pe.sunat.sunatapi.repositories.DetalleImpuestoRepository;
 import pe.sunat.sunatapi.models.Empresa;
+import pe.sunat.sunatapi.models.Factura;
 import pe.sunat.sunatapi.models.Servicio;
 import pe.sunat.sunatapi.repositories.EmpresaRepository;
 import pe.sunat.sunatapi.repositories.ServicioRepository;
 
 @RestController
-public class FacturaController {
+public interface FacturaController extends JpaRepository<Factura, BigInteger> {
     
 }

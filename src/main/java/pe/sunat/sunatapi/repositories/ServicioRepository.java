@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import pe.sunat.sunatapi.models.Empresa;
 import pe.sunat.sunatapi.models.Servicio;
 
-
-public interface ServicioRepository extends JpaRepository<Servicio, Integer> {
+@Repository
+public interface ServicioRepository extends JpaRepository<Servicio, Integer>  {
 
 }

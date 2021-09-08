@@ -24,14 +24,14 @@ import pe.sunat.sunatapi.repositories.ServicioRepository;
 @RestController
 @RequestMapping(value = "api/empresa", produces = "application/json")
 public class EmpresaController {
-      /*  private final EmpresaRepository empresaData;
+        private final EmpresaRepository empresaData;
         private final ServicioRepository servicioData;
         public EmpresaController(EmpresaRepository empresaData,
         ServicioRepository servicioData ){
             this.empresaData = empresaData;
             this.servicioData = servicioData;
             
-        }*/
+        }
 //     // Crear empresa
         // @PostMapping(value = "/", produces =MediaType.APPLICATION_JSON_VALUE)
         // public ResponseEntity<Integer> create(@RequestBody Empresa em){
