@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import pe.sunat.sunatapi.models.Empresa;
-import pe.sunat.sunatapi.models.Orden;
 import pe.sunat.sunatapi.models.Servicio;
 
 @Repository

@@ -2,7 +2,6 @@ package pe.sunat.sunatapi.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import pe.sunat.sunatapi.models.Empresa;
 import pe.sunat.sunatapi.models.Factura;
 import pe.sunat.sunatapi.models.Orden;
 

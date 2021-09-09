@@ -13,18 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-// import pe.sunat.sunatapi.models.DetalleImpuesto;
-// import pe.sunat.sunatapi.repositories.DetalleImpuestoRepository;
 import pe.sunat.sunatapi.models.Empresa;
-import pe.sunat.sunatapi.models.Factura;
 import pe.sunat.sunatapi.models.Orden;
-import pe.sunat.sunatapi.models.Servicio;
 import pe.sunat.sunatapi.repositories.EmpresaRepository;
-import pe.sunat.sunatapi.repositories.FacturaRepository;
 import pe.sunat.sunatapi.repositories.OrdenRepository;
-import pe.sunat.sunatapi.repositories.PersonaRepository;
-import pe.sunat.sunatapi.repositories.ServicioRepository;
 
 @RestController
 @RequestMapping(value = "api/orden", produces = "application/json")
