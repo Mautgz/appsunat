@@ -27,27 +27,25 @@ import pe.sunat.sunatapi.repositories.PersonaRepository;
 import pe.sunat.sunatapi.repositories.ServicioRepository;
 
 @RestController
-@RequestMapping(value = "api/factura", produces = "application/json")
-public class FacturaController {
-    private final FacturaRepository facturaData;
-    private final OrdenRepository ordenData;
+@RequestMapping(value = "api/orden", produces = "application/json")
+public class OrdenController {
+  private final OrdenRepository ordenData;
+     private final EmpresaRepository empresaData;
 
-    public FacturaController(FacturaRepository facturaData, OrdenRepository ordenData) {
-        this.facturaData = facturaData;
+    public OrdenController(OrdenRepository ordenData,EmpresaRepository empresaData) {
         this.ordenData = ordenData;
+        this.empresaData = empresaData;
     }
-
-    // Crear empresa
+     //Crear empresa
     @PostMapping(value = "/", produces =MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> create(@RequestBody Factura f){
-        facturaData.save(f);
-        facturaData.flush(); // Crear id 
-        Factura generada = f;
-        List<Orden> listOrdenes = f.getOrden();
-        listOrdenes.stream().forEach(o -> o.setFactura(generada));
-        ordenData.saveAllAndFlush(listOrdenes);
-        return new ResponseEntity<Integer>(f.getId(), HttpStatus.CREATED);
-        
-    }
-
+     public ResponseEntity<Integer> create(@RequestBody Orden orden){
+        ordenData.save(orden);
+        ordenData.flush(); // Crear id 
+        Orden generada = orden;
+        List<Empresa> listEmpresas = orden.getEmpresa();
+        listEmpresas.stream().forEach(o -> o.setOrden(generada));
+        empresaData.saveAllAndFlush(listEmpresas);
+        return new ResponseEntity<Integer>(orden.getId(), HttpStatus.CREATED);
+         
+     }
 }

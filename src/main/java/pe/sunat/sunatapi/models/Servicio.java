@@ -27,11 +27,18 @@ public class Servicio {
     private String descripcionServicio;
     private float precio;
 
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Factura> factura;
+   /* @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="orden_id")
+    private Orden orden;*/
 
-    
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="empresa_id")
+    private Empresa empresa;
+     
+
+
 
 
 }

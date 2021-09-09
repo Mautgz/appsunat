@@ -32,9 +32,12 @@ public class Orden {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="factura_id")
     private Factura factura;
+
+
+    @Transient
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Empresa> empresa;
     
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="servicio_id")
-    private Servicio servicio;
+
+
 }

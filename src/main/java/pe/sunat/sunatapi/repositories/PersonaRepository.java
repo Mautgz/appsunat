@@ -13,5 +13,5 @@ import pe.sunat.sunatapi.models.Persona;
 
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, BigInteger>  {
-   
+    
 }

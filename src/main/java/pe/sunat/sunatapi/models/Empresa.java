@@ -28,9 +28,19 @@ public class Empresa {
     private String razonSocial;
     private String direccion;
 
+   /* @Transient
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Factura> factura;*/
+
     @Transient
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Factura> factura;
+    private List<Servicio> servicio;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="orden_id")
+    private Orden orden;
+        
 
 
 }
