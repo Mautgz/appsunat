@@ -42,7 +42,7 @@ public class OrdenController {
      }
 
      @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Orden> findByCodigo(@PathVariable Integer id){
+    public ResponseEntity<Orden> findById(@PathVariable Integer id){
         Optional<Orden> optOrden =ordenData.findById(id);
         if(optOrden.isPresent()){
             Orden orden = optOrden.get();
