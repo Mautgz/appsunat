@@ -45,9 +45,9 @@ public class PersonaController {
         
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Persona> buscarPorId(@PathVariable int id){
-        Optional<Persona> optPersona = personaData.buscarPorId(id);
+    @GetMapping(value = "/{dni}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Persona> buscarPorId(@PathVariable BigInteger dni){
+        Optional<Persona> optPersona = personaData.buscarPorDni(dni);
         if(optPersona.isPresent()){
             Persona persona = optPersona.get();
             return new ResponseEntity<Persona>(persona, HttpStatus.OK);

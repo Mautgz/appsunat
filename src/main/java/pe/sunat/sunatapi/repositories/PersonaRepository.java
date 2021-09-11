@@ -16,6 +16,6 @@ import java.util.Optional;
 
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, BigInteger>  {
-    @Query(value = "SELECT o FROM Persona o WHERE o.id=?1")
-    Optional<Persona> buscarPorId(int id);
+    @Query(value = "SELECT o FROM Persona o WHERE o.dni=?1")
+    Optional<Persona> buscarPorDni(BigInteger dni);
 }
