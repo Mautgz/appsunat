@@ -22,7 +22,7 @@ import pe.sunat.sunatapi.repositories.OrdenRepository;
 @RequestMapping(value = "api/orden", produces = "application/json")
 public class OrdenController {
   private final OrdenRepository ordenData;
-     private final EmpresaRepository empresaData;
+  private final EmpresaRepository empresaData;
 
     public OrdenController(OrdenRepository ordenData,EmpresaRepository empresaData) {
         this.ordenData = ordenData;
