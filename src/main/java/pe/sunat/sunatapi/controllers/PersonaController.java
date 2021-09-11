@@ -2,7 +2,9 @@ package pe.sunat.sunatapi.controllers;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,4 +44,17 @@ public class PersonaController {
         return new ResponseEntity<Integer>(p.getId(), HttpStatus.CREATED);
         
     }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Persona> buscarPorId(@PathVariable int id){
+        Optional<Persona> optPersona = personaData.buscarPorId(id);
+        if(optPersona.isPresent()){
+            Persona persona = optPersona.get();
+            return new ResponseEntity<Persona>(persona, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<Persona>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

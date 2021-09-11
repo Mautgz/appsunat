@@ -11,7 +11,11 @@ import org.springframework.stereotype.Repository;
 import pe.sunat.sunatapi.models.Factura;
 import pe.sunat.sunatapi.models.Persona;
 
+import org.springframework.data.jpa.repository.Query.*;
+import java.util.Optional;
+
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, BigInteger>  {
-    
+    @Query(value = "SELECT o FROM Persona o WHERE o.id=?1")
+    Optional<Persona> buscarPorId(int id);
 }

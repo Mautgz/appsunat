@@ -42,8 +42,17 @@ public class FacturaController {
         List<Orden> listOrdenes = f.getOrden();
         listOrdenes.stream().forEach(o -> o.setFactura(generada));
         ordenData.saveAllAndFlush(listOrdenes);
-        return new ResponseEntity<Integer>(f.getId(), HttpStatus.CREATED);
-        
+        return new ResponseEntity<Integer>(f.getId(), HttpStatus.CREATED);   
     }
 
+    @GetMapping(value = "/{codigoFactura}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Factura> findByCodigo(@PathVariable BigInteger codigoFactura){
+        Optional<Factura> optFactura =facturaData.findByCodigo(codigoFactura);
+        if(optFactura.isPresent()){
+            Factura factura = optFactura.get();
+            return new ResponseEntity<Factura>(factura,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Factura>(HttpStatus.NOT_FOUND);
+        }   
+    }
 }

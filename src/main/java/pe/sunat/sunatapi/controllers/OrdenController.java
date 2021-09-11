@@ -40,4 +40,17 @@ public class OrdenController {
         return new ResponseEntity<Integer>(orden.getId(), HttpStatus.CREATED);
          
      }
+
+     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Orden> findByCodigo(@PathVariable Integer id){
+        Optional<Orden> optOrden =ordenData.findById(id);
+        if(optOrden.isPresent()){
+            Orden orden = optOrden.get();
+            return new ResponseEntity<Orden>(orden,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Orden>(HttpStatus.NOT_FOUND);
+        }
+
+        
+    }
 }
