@@ -1,4 +1,6 @@
 package pe.sunat.sunatapi.models;
+import  pe.sunat.sunatapi.models.Detalle;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -19,22 +21,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private BigInteger codigoFactura;
+    private int idFactura;
+    private String codigoFactura;
+    private String emisor;
+    private String receptor;
     private Date fechaEmision;
-    private float igv;
-    private float totalImpuesto;
-    private float total;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="persona_id")
-    private Persona persona;
-
+    private BigDecimal totalIgv;
+    private BigDecimal totalVenta;
 
     @Transient
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Orden> orden;
+    private List<Detalle> detalle;
 
 
 

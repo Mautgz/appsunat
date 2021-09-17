@@ -13,14 +13,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "t_orden")
+@Table(name = "t_detalle")
 
-public class Orden {
+public class Detalle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private int meses;
-    private BigDecimal subtotal;
+    private Integer idDetalle;
+    private String codigoItem;
+    private Integer cantidad;
+    private String descripcion;
+    private BigDecimal precioUnitario;
+    private BigDecimal impuesto;
+    private BigDecimal totalVenta;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,9 +32,6 @@ public class Orden {
     private Factura factura;
 
 
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Empresa> empresa;
     
 
 

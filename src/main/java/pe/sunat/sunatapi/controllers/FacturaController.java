@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.sunat.sunatapi.models.Factura;
-import pe.sunat.sunatapi.models.Orden;
+import pe.sunat.sunatapi.models.Detalle;
 
 import pe.sunat.sunatapi.repositories.FacturaRepository;
-import pe.sunat.sunatapi.repositories.OrdenRepository;
+import pe.sunat.sunatapi.repositories.DetalleRepository;
 
 
 @RestController
 @RequestMapping(value = "api/factura", produces = "application/json")
 public class FacturaController {
     private final FacturaRepository facturaData;
-    private final OrdenRepository ordenData;
+    private final DetalleRepository detalleData;
 
-    public FacturaController(FacturaRepository facturaData, OrdenRepository ordenData) {
+    public FacturaController(FacturaRepository facturaData, DetalleRepository detalleData) {
         this.facturaData = facturaData;
-        this.ordenData = ordenData;
+        this.detalleData = detalleData;
     }
 
     // Crear empresa
@@ -39,10 +39,10 @@ public class FacturaController {
         facturaData.flush(); // Crear id 
         Factura generada = f;
 
-        List<Orden> listOrdenes = f.getOrden();
-        listOrdenes.stream().forEach(o -> o.setFactura(generada));
-        ordenData.saveAllAndFlush(listOrdenes);
-        return new ResponseEntity<Integer>(f.getId(), HttpStatus.CREATED);   
+        List<Detalle> listDetalles = f.getDetalle();
+        listDetalles.stream().forEach(o -> o.setFactura(generada));
+        detalleData.saveAllAndFlush(listDetalles);
+        return new ResponseEntity<Integer>(f.getIdFactura(), HttpStatus.CREATED);   
     }
 
     @GetMapping(value = "/{codigoFactura}", produces = MediaType.APPLICATION_JSON_VALUE)
