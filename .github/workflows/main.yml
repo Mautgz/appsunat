@@ -21,7 +21,7 @@ jobs:
         java-version: '11'
     
     - name: Build with Maven Backend
-      run: mvn -B package --file sunatapi/pom.xml -DskipTests
+      run: mvn -f package --file appsunat/pom.xml -DskipTests
 
     - name: Build, Push and Release a Docker container to Heroku Backend
       uses: gonuit/heroku-docker-deploy@v1.3.2 
