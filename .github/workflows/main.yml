@@ -41,6 +41,5 @@ jobs:
 
           process_type: web
 
-          server:
-    port: $PORT
+          
 
