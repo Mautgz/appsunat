@@ -15,39 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.sunat.sunatapi.models.Factura;
-import pe.sunat.sunatapi.models.Detalle;
+
 
 import pe.sunat.sunatapi.repositories.FacturaRepository;
-import pe.sunat.sunatapi.repositories.DetalleRepository;
+
 
 
 @RestController
 @RequestMapping(value = "api/factura", produces = "application/json")
 public class FacturaController {
     private final FacturaRepository facturaData;
-    private final DetalleRepository detalleData;
 
-    public FacturaController(FacturaRepository facturaData, DetalleRepository detalleData) {
+
+    public FacturaController(FacturaRepository facturaData) {
         this.facturaData = facturaData;
-        this.detalleData = detalleData;
+
     }
 
     // Crear empresa
     @PostMapping(value = "/", produces =MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> create(@RequestBody Factura f){
+    public ResponseEntity<BigInteger> create(@RequestBody Factura f){
         facturaData.save(f);
         facturaData.flush(); // Crear id 
-        Factura generada = f;
-
-        List<Detalle> listDetalles = f.getDetalle();
-        listDetalles.stream().forEach(o -> o.setFactura(generada));
-        detalleData.saveAllAndFlush(listDetalles);
-        return new ResponseEntity<Integer>(f.getIdFactura(), HttpStatus.CREATED);   
+        // Factura generada = f;
+        return new ResponseEntity<BigInteger>(f.getNumeroFactura(), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/{codigoFactura}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Factura> findByCodigo(@PathVariable BigInteger codigoFactura){
-        Optional<Factura> optFactura =facturaData.findByCodigo(codigoFactura);
+    @GetMapping(value = "/{numeroFactura}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Factura> findBynumFactura(@PathVariable BigInteger numeroFactura){
+        Optional<Factura> optFactura =facturaData.findByNumFactura(numeroFactura);
         if(optFactura.isPresent()){
             Factura factura = optFactura.get();
             return new ResponseEntity<Factura>(factura,HttpStatus.OK);
