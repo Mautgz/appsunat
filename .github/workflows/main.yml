@@ -33,7 +33,7 @@ jobs:
           
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
 
-          dockerfile_directory: ./sunatapi
+          dockerfile_directory: ./appsunat
 
           dockerfile_name: DockerFile
 
