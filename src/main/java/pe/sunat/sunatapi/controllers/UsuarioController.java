@@ -18,45 +18,58 @@ import pe.sunat.sunatapi.repositories.UsuarioRepository;
 @RequestMapping(value = "app")
 public class UsuarioController {
     private static final String LOGIN_INDEX = "login";
-    private static final String REGISTER_INDEX = "register";
-    private static final String REGISTER_SUCCESS = "register_success";
-    private static String MODEL_CONTACT="factura";
+    private static final String INDEX = "inicio";  
+    private static String MODEL_CONTACT="user";
     private static String MODEL_MESSAGE="mensaje";
-    private final FacturaRepository facturaData;
     private final UsuarioRepository usuariosData;
     
-    public UsuarioController(FacturaRepository facturaData, UsuarioRepository usuariosData){
-        this.facturaData = facturaData;
+    public UsuarioController(UsuarioRepository usuariosData){
         this.usuariosData = usuariosData;
-    }      
+    } 
+    
+    @GetMapping("/inicio")
+    public String getIndex(Model model){
+        model.addAttribute("user", new Usuario());
+        return INDEX;
+    }
 
     @GetMapping("/login")
     public String getLogin(Model model){
+        model.addAttribute("user", new Usuario());
         return LOGIN_INDEX;
     }
-    @GetMapping("/register")
-    public String getRegister(Model model){
-        model.addAttribute("usuario", new Usuario());
-        return REGISTER_INDEX;
-    }
-    @PostMapping("/process_register")
-    public String postRegister(Usuario usuario){
-        usuariosData.save(usuario);
-        return REGISTER_SUCCESS;
-    }
+
     @PostMapping("/login")
-    public String loginSubmitForm(Model model,@Valid Usuario objUser, HttpServletRequest request, BindingResult result )
+    public String loginSubmitForm(Model model,
+    @Valid Usuario objUser, 
+    HttpServletRequest request, 
+    BindingResult result )
     {
-        String page=LOGIN_INDEX;
         model.addAttribute(MODEL_CONTACT, new Usuario());
         if(result.hasFieldErrors()) {
-            model.addAttribute(MODEL_MESSAGE, "No se ha podido loguear");
+            model.addAttribute(MODEL_MESSAGE, "No se ha podido Iniciar la Sesión, por favor intentelo nuevamente.");
         }else{
-            Optional<Usuario> userDB = this.usuariosData.findById(objUser.getUserID());
-            if(!userDB.isPresent()){
-                model.addAttribute(MODEL_MESSAGE, "DNI no existe");
+            Optional<Usuario> userDB = this.usuariosData.findById(objUser.getAdminUser());
+            if(userDB.isPresent()){
+                if(userDB.get().getPassword().equals(objUser.getPassword())){
+                    model.addAttribute(MODEL_CONTACT, userDB.get());
+                    model.addAttribute(MODEL_MESSAGE, "La sesión fue iniciada correctamente");
+                    request.getSession().setAttribute("user", objUser);
+                } else {
+                    model.addAttribute(MODEL_MESSAGE, "La contraseña no es válida");
+                    return LOGIN_INDEX;
+                }
+            } else {
+                model.addAttribute(MODEL_MESSAGE, "Usuario no existe");    
+                return LOGIN_INDEX;
             }
         }
-        return page;             
+        return INDEX;             
     }
+
+    @GetMapping("/logout")
+	public String logoutSession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/app/inicio";
+	}
 }

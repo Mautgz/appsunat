@@ -12,7 +12,6 @@ import io.micrometer.core.lang.Nullable;
 import javax.persistence.Id;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 import javax.persistence.Column;
 
@@ -27,15 +26,7 @@ import lombok.*;
 @Table(name = "t_user")
 public class Usuario implements Serializable{
     @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userID;
-
-    @Nullable
-    private String adminEmail;
-
-    private BigInteger dniEmisor;
-
-    private Integer tipoUsuario = 1;
-
+    @Column(name = "admin_user")
+    private String adminUser;
+    private String password;
 }
