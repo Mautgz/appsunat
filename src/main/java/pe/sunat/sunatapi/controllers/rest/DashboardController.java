@@ -32,4 +32,9 @@ public class DashboardController {
         return  new ResponseEntity<List<Map<String, Object>>>(
             facturaData.querySumaTotalByReceptor(), HttpStatus.OK);
     }
+    @GetMapping(value = "/totalfacturas", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Map<String, Object>>> facturas(){
+        return  new ResponseEntity<List<Map<String, Object>>>(
+            facturaData.querySumaTotalByMonthFacturas(), HttpStatus.OK);
+    }
 }
