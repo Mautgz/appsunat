@@ -40,7 +40,10 @@
               </li>
             </th:block>
           </ul>      
-          <ul class="nav navbar-nav navbar-right">  
+          <ul class="nav navbar-nav navbar-right">
+            <th:block th:if="${session.user==null}">
+                <a href="/app/login" class="btn btn-primary btn-block">Iniciar Sesión</a>
+            </th:block>  
             <th:block th:if="${session.user!=null}">
               <li><a href="/app/logout"><span class="glyphicon glyphicon-log-in"></span>Cerrar Sesión</a></li>
             </th:block>

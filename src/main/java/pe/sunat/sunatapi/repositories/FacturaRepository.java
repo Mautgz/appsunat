@@ -20,4 +20,7 @@ public interface FacturaRepository extends JpaRepository<Factura, BigInteger> {
     @Query(value = "SELECT CAST(o.dniReceptor AS text) AS dniReceptor, SUM(o.montoTotal) as montototal FROM Factura o GROUP BY o.dniReceptor")
     List<Map<String, Object>> querySumaTotalByReceptor();
 
+    @Query(value = "SELECT DATE_TRUNC('month', o.fechaEmision) AS fecha_emision_to_month, COUNT(o.idFactura) as facturas FROM Factura o GROUP BY DATE_TRUNC('month', o.fechaEmision)")
+    List<Map<String, Object>> querySumaTotalByMonthFacturas();
+
 }
